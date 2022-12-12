@@ -24,12 +24,12 @@ namespace CosmosKernel4
             int x = 0;
             int y = 0;
             int xx = 639;
+            int maxx = 640;
+            int maxy = 480;
             int yy = 479;
             for (n = 0; n < 5; n++)
             {
-                canvas.DrawRectangle(pen, x, y, xx, yy);
-                x += 100;
-                y += 100;
+                canvas.DrawRectangle(pen, (maxx-xx)/2,(maxy-yy)/2, xx, yy);
                 xx = xx - 100;
                 yy = yy - 100;
             }
