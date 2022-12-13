@@ -11,6 +11,18 @@ namespace CosmosKernel4
     public class Kernel : Sys.Kernel
     {
         Canvas canvas;
+        void vlines(Bitmap b, int x, int y, int y1, int colors)
+        {
+            int n = 0;
+            int[] bt = b.rawData;
+            if (x < b.Width && y < b.Height && x > -1 && y > -1 && y1 < b.Height && y1 > -1 && y1 >= y)
+            {
+                for (n = 0; n < y1 - y; n++)
+                {
+                    bt[y * b.Width + x + (n* b.Width)] = colors;
+                }
+            }
+        }
         void hlines(Bitmap b, int x, int y,int x1, int colors)
         {
             int n = 0;
@@ -67,6 +79,11 @@ namespace CosmosKernel4
             {
                 hlines(bitmap, 0, n,maxx-1, colors(0, 0, 0));
                 
+            }
+            for (n = 0; n < maxx; n = n + 32)
+            {
+                vlines(bitmap, n,0, maxy-1, colors(0, 0, 0));
+
             }
             canvas.DrawImage(bitmap, new Point(0, 0));
             canvas.Display();
