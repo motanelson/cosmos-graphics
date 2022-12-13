@@ -11,6 +11,12 @@ namespace CosmosKernel4
     public class Kernel : Sys.Kernel
     {
         Canvas canvas;
+        void psets(Bitmap b,int x , int y,int colors)
+        {
+            int n = 0;
+            int[] bt = b.rawData;
+            if (x< b.Width && y<b.Height && x>-1 && y>-1) bt[y*b.Width+x] = colors;
+        }
         int colors(byte reds,byte greens ,byte blues) {
             return blues | greens << 8 | reds  <<8;
         }
@@ -46,6 +52,11 @@ namespace CosmosKernel4
             int yy = 479;
             Bitmap bitmap = createsbitmap((uint)maxx,(uint) maxy);
             fills(bitmap, colors(0, 0xff, 0));
+            for (n = 0; n < maxy; n++)
+            {
+                psets(bitmap, n, n, colors(0, 0, 0));
+                psets(bitmap, n, maxy-1-n, colors(0,0, 0));
+            }
             canvas.DrawImage(bitmap, new Point(0, 0));
             canvas.Display();
             Console.ReadKey();
