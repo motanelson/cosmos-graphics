@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
+using Point = Cosmos.System.Graphics.Point;
 using Sys = Cosmos.System;
 
 namespace CosmosKernel4
@@ -20,6 +21,12 @@ namespace CosmosKernel4
         protected override void Run()
         {
             Pen pen = new Pen(Color.DarkGreen);
+            int nb = 640 * 480;
+            int[] bt = new int[nb];
+            
+            Bitmap bitmap =  new Bitmap(640, 480, ColorDepth.ColorDepth32);
+
+            bt=bitmap.rawData;
             int n = 0;
             int x = 0;
             int y = 0;
@@ -27,14 +34,13 @@ namespace CosmosKernel4
             int maxx = 640;
             int maxy = 480;
             int yy = 479;
-            for (n = 0; n < 5; n++)
+            for (n = 0; n < nb; n++)
             {
-                canvas.DrawRectangle(pen, (maxx-xx)/2,(maxy-yy)/2, xx, yy);
-                xx = xx - 100;
-                yy = yy - 100;
+                bt[n]=0xff00;
+                
             }
-            
-            
+
+            canvas.DrawImage(bitmap, new Point(0, 0));
             canvas.Display();
             Console.ReadKey();
            
