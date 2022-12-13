@@ -12,6 +12,14 @@ namespace CosmosKernel4
     public class Kernel : Sys.Kernel
     {
         Canvas canvas;
+        int parts(int i,int t)
+        {
+            return i/t;
+        }
+        void drawWindows(Bitmap wins,int x,int y)
+        {
+            canvas.DrawImage(wins, new Point(x,y));
+        }
         Bitmap createWindow(uint x,uint y,int colorss)
         {
             Bitmap b = createsbitmap(x, y);
@@ -103,8 +111,9 @@ namespace CosmosKernel4
             int maxx = 640;
             int maxy = 480;
             int yy = 479;
-            Bitmap windows1 = createWindow(100,100,colors(0,0xff,0));
-            canvas.DrawImage(windows1, new Point(100, 100));
+            Bitmap[] windowss = new Bitmap[10];
+            for(n=0;n<8;n++) windowss[n]=createWindow(100,100,colors(0,(byte)parts(0xff,n),0));
+            for (n = 0; n < 8; n++) drawWindows(windowss[n], n * 10 + 8, n * 10 + 8);
             canvas.Display();
             Console.ReadKey();
            
