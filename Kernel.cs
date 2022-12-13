@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using Point = Cosmos.System.Graphics.Point;
 using Sys = Cosmos.System;
@@ -11,6 +12,13 @@ namespace CosmosKernel4
     public class Kernel : Sys.Kernel
     {
         Canvas canvas;
+        Bitmap createWindow(uint x,uint y,int colorss)
+        {
+            Bitmap b = createsbitmap(x, y);
+            fills(b, colorss);
+            rets(b, 0,0,(int)x-1,(int)  y-1,0);
+            return b;
+        }
         void rets(Bitmap b, int x, int y, int x1, int y1, int colors)
         {
 
@@ -95,10 +103,8 @@ namespace CosmosKernel4
             int maxx = 640;
             int maxy = 480;
             int yy = 479;
-            Bitmap bitmap = createsbitmap((uint)maxx,(uint) maxy);
-            fills(bitmap, colors(0, 0xff, 0));
-            rets(bitmap,100,100,200,200,colors(0, 0, 0));
-            canvas.DrawImage(bitmap, new Point(0, 0));
+            Bitmap windows1 = createWindow(100,100,colors(0,0xff,0));
+            canvas.DrawImage(windows1, new Point(100, 100));
             canvas.Display();
             Console.ReadKey();
            
