@@ -12,6 +12,8 @@ namespace CosmosKernel4
     public class Kernel : Sys.Kernel
     {
         Canvas canvas;
+        int maxy;
+        int maxx;
         int parts(int i,int t)
         {
             return i/t;
@@ -94,8 +96,10 @@ namespace CosmosKernel4
         }
         protected override void BeforeRun()
         {
+            maxx = 640;
+            maxy = 480;
             Console.WriteLine("start.");
-            canvas = FullScreenCanvas.GetFullScreenCanvas(new Mode(640, 480, ColorDepth.ColorDepth32));
+            canvas = FullScreenCanvas.GetFullScreenCanvas(new Mode(maxx, maxy, ColorDepth.ColorDepth32));
             canvas.Clear(Color.Green);
         }
 
@@ -107,10 +111,9 @@ namespace CosmosKernel4
             int n = 0;
             int x = 0;
             int y = 0;
-            int xx = 639;
-            int maxx = 640;
-            int maxy = 480;
-            int yy = 479;
+            int xx = maxx-1;
+            
+            int yy = maxy-1;
             Bitmap[] windowss = new Bitmap[10];
             for(n=0;n<8;n++) windowss[n]=createWindow(100,100,colors(0,(byte)parts(0xff,n),0));
             for (n = 0; n < 8; n++) drawWindows(windowss[n], n * 10 + 8, n * 10 + 8);
